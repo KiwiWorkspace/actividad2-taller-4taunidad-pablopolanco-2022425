@@ -1,0 +1,173 @@
+<form class="formulario" [formGroup]="formulario" (ngSubmit)="enviar()" novalidate>
+  <div class="aviso aviso--exito" role="status" *ngIf="mensajeExito()">
+    <i class="bi bi-check-circle" aria-hidden="true"></i>
+    <span>{{ mensajeExito() }}</span>
+  </div>
+
+  <div class="aviso aviso--error" role="alert" *ngIf="mensajeError()">
+    <i class="bi bi-x-circle" aria-hidden="true"></i>
+    <span>{{ mensajeError() }}</span>
+  </div>
+
+  <div class="aviso aviso--advertencia" role="alert" *ngIf="intentoEnvio() && formulario.invalid">
+    <i class="bi bi-exclamation-triangle" aria-hidden="true"></i>
+    <span>
+      Hay {{ contarCamposInvalidos() }} campo(s) con errores y no se envió nada al servicio. Revisa los
+      controles marcados en rojo.
+    </span>
+  </div>
+
+  <div class="rejilla">
+    <div class="campo" [class.campo--invalido]="mostrarError('codigo')">
+      <label for="codigo">Código SKU</label>
+      <input
+        id="codigo"
+        type="text"
+        class="control"
+        formControlName="codigo"
+        placeholder="ABC-1234"
+        autocomplete="off"
+        [attr.aria-invalid]="mostrarError('codigo')"
+        aria-describedby="ayuda-codigo error-codigo"
+      />
+      <p class="ayuda" id="ayuda-codigo">Tres letras en mayúsculas, guion y de 4 a 8 caracteres.</p>
+      <ul class="errores" id="error-codigo" *ngIf="mostrarError('codigo')">
+        <li class="error" *ngFor="let mensaje of mensajesDe('codigo')">
+          <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+          <span>{{ mensaje }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="campo" [class.campo--invalido]="mostrarError('nombre')">
+      <label for="nombre">Nombre</label>
+      <input
+        id="nombre"
+        type="text"
+        class="control"
+        formControlName="nombre"
+        placeholder="Café molido 250 g"
+        [attr.aria-invalid]="mostrarError('nombre')"
+        aria-describedby="ayuda-nombre error-nombre"
+      />
+      <p class="ayuda" id="ayuda-nombre">Entre 3 y 50 caracteres.</p>
+      <ul class="errores" id="error-nombre" *ngIf="mostrarError('nombre')">
+        <li class="error" *ngFor="let mensaje of mensajesDe('nombre')">
+          <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+          <span>{{ mensaje }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="campo campo--ancho" [class.campo--invalido]="mostrarError('descripcion')">
+      <label for="descripcion">Descripción</label>
+      <textarea
+        id="descripcion"
+        class="control control--area"
+        formControlName="descripcion"
+        rows="3"
+        placeholder="Café de origen Colombia, tueste medio, molienda fina."
+        [attr.aria-invalid]="mostrarError('descripcion')"
+        aria-describedby="ayuda-descripcion error-descripcion"
+      ></textarea>
+      <p class="ayuda" id="ayuda-descripcion">Entre 10 y 300 caracteres.</p>
+      <ul class="errores" id="error-descripcion" *ngIf="mostrarError('descripcion')">
+        <li class="error" *ngFor="let mensaje of mensajesDe('descripcion')">
+          <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+          <span>{{ mensaje }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="campo" [class.campo--invalido]="mostrarError('precio')">
+      <label for="precio">Precio</label>
+      <input
+        id="precio"
+        type="number"
+        class="control"
+        formControlName="precio"
+        min="0"
+        step="0.01"
+        placeholder="18500.50"
+        [attr.aria-invalid]="mostrarError('precio')"
+        aria-describedby="ayuda-precio error-precio"
+      />
+      <p class="ayuda" id="ayuda-precio">Mayor que cero y hasta dos decimales.</p>
+      <ul class="errores" id="error-precio" *ngIf="mostrarError('precio')">
+        <li class="error" *ngFor="let mensaje of mensajesDe('precio')">
+          <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+          <span>{{ mensaje }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="campo" [class.campo--invalido]="mostrarError('categoria')">
+      <label for="categoria">Categoría</label>
+      <select
+        id="categoria"
+        class="control"
+        formControlName="categoria"
+        [attr.aria-invalid]="mostrarError('categoria')"
+        aria-describedby="ayuda-categoria error-categoria"
+      >
+        <option [ngValue]="null">Selecciona una categoría</option>
+        <option *ngFor="let categoria of categorias" [ngValue]="categoria">{{ categoria }}</option>
+      </select>
+      <p class="ayuda" id="ayuda-categoria">Define dónde se almacena el producto.</p>
+      <ul class="errores" id="error-categoria" *ngIf="mostrarError('categoria')">
+        <li class="error" *ngFor="let mensaje of mensajesDe('categoria')">
+          <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+          <span>{{ mensaje }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="campo" [class.campo--invalido]="mostrarError('stock')">
+      <label for="stock">Stock</label>
+      <input
+        id="stock"
+        type="number"
+        class="control"
+        formControlName="stock"
+        min="0"
+        step="1"
+        placeholder="120"
+        [attr.aria-invalid]="mostrarError('stock')"
+        aria-describedby="ayuda-stock error-stock"
+      />
+      <p class="ayuda" id="ayuda-stock">Unidades disponibles, número entero entre 0 y 100000.</p>
+      <ul class="errores" id="error-stock" *ngIf="mostrarError('stock')">
+        <li class="error" *ngFor="let mensaje of mensajesDe('stock')">
+          <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+          <span>{{ mensaje }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="campo campo--ancho">
+      <div class="casilla">
+        <input id="activo" type="checkbox" class="control--casilla" formControlName="activo" />
+        <label for="activo">Producto activo</label>
+      </div>
+      <p class="ayuda">Si se desmarca, el producto queda registrado pero no disponible para la venta.</p>
+    </div>
+  </div>
+
+  <div class="acciones">
+    <button type="submit" class="boton boton--primario" [disabled]="enviando()">
+      <i class="bi bi-send" aria-hidden="true"></i>
+      <span>{{ enviando() ? 'Registrando...' : 'Registrar producto' }}</span>
+    </button>
+    <button
+      type="button"
+      class="boton boton--secundario"
+      [disabled]="enviando()"
+      (click)="reiniciar()"
+    >
+      <i class="bi bi-eraser" aria-hidden="true"></i>
+      <span>Limpiar formulario</span>
+    </button>
+  </div>
+</form>
+
+<app-estado-formulario [formulario]="formulario" [campos]="campos" />

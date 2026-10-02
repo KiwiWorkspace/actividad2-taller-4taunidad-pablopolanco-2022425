@@ -1,0 +1,140 @@
+/* Paleta del proyecto, definida en un solo lugar. */
+:root {
+  --verde-oscuro: #0d5257;
+  --verde: #0a8080;
+  --salmon: #f08a7c;
+  --durazno: #ffc8bc;
+  --salmon-texto: #9c3324;
+  --texto: #1c2b2c;
+  --texto-suave: #4f6062;
+  --fondo: #f2f7f7;
+  --superficie: #ffffff;
+  --borde: #d7e3e3;
+  --radio: 8px;
+  --sombra: 0 1px 3px rgba(13, 82, 87, 0.12);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--fondo);
+  color: var(--texto);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+.contenedor {
+  width: min(1080px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+.tarjeta {
+  background-color: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 1.5rem;
+  margin-block: 1.5rem;
+}
+
+.seccion__titulo {
+  color: var(--verde-oscuro);
+  font-size: 1.5rem;
+}
+
+.seccion__descripcion {
+  color: var(--texto-suave);
+  margin-block: 0.25rem 1.25rem;
+}
+
+.boton {
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radio);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-weight: 600;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.boton:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.boton--primario {
+  background-color: var(--verde);
+  color: #ffffff;
+}
+
+.boton--primario:hover:not(:disabled) {
+  background-color: var(--verde-oscuro);
+}
+
+.boton--secundario {
+  background-color: var(--superficie);
+  border-color: var(--verde);
+  color: var(--verde-oscuro);
+}
+
+.boton--secundario:hover:not(:disabled) {
+  background-color: var(--verde-oscuro);
+  color: #ffffff;
+}
+
+.aviso {
+  align-items: flex-start;
+  border: 1px solid transparent;
+  border-radius: var(--radio);
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+}
+
+.aviso--exito {
+  background-color: #e3f1f1;
+  border-color: var(--verde);
+  color: var(--verde-oscuro);
+}
+
+.aviso--advertencia {
+  background-color: var(--durazno);
+  border-color: var(--salmon);
+  color: var(--salmon-texto);
+}
+
+.aviso--error {
+  background-color: var(--durazno);
+  border-color: var(--salmon);
+  color: var(--salmon-texto);
+}
+
+@media (max-width: 640px) {
+  .tarjeta {
+    padding: 1.1rem;
+  }
+}

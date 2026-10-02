@@ -1,0 +1,35 @@
+<section class="estado">
+  <h3 class="estado__titulo">Estado del formulario</h3>
+  <ul class="indicadores indicadores--formulario">
+    <li
+      class="indicador"
+      *ngFor="let indicador of indicadoresFormulario()"
+      [class.indicador--favorable]="indicador.favorable"
+      [class.indicador--desfavorable]="!indicador.favorable"
+    >
+      <span class="indicador__etiqueta">{{ indicador.etiqueta }}</span>
+      <span class="indicador__valor">{{ indicador.valor }}</span>
+    </li>
+  </ul>
+
+  <h3 class="estado__titulo">Estado de cada control</h3>
+  <ul class="controles">
+    <li
+      class="control-estado"
+      *ngFor="let campo of campos()"
+      [class.control-estado--alerta]="campo.control.invalid"
+    >
+      <span class="control-estado__nombre">{{ campo.etiqueta }}</span>
+      <ul class="indicadores indicadores--compactos">
+        <li
+          class="indicador"
+          *ngFor="let indicador of indicadoresControl(campo.control)"
+          [class.indicador--favorable]="indicador.favorable"
+          [class.indicador--desfavorable]="!indicador.favorable"
+        >
+          {{ indicador.etiqueta }}: {{ indicador.valor }}
+        </li>
+      </ul>
+    </li>
+  </ul>
+</section>

@@ -1,0 +1,33 @@
+<header class="cabecera">
+  <div class="contenedor cabecera__contenido">
+    <p class="marca">
+      <i class="bi bi-box-seam" aria-hidden="true"></i>
+      <span>Registro de productos</span>
+    </p>
+    <nav class="navegacion" aria-label="Secciones de la página">
+      <a class="navegacion__enlace" href="#formulario">Formulario</a>
+      <a class="navegacion__enlace" href="#listado">Productos</a>
+    </nav>
+  </div>
+</header>
+
+<main class="contenedor">
+  <section class="tarjeta" id="formulario">
+    <h1 class="seccion__titulo">Nuevo producto</h1>
+    <p class="seccion__descripcion">
+      Los datos solo se envían al servicio cuando todas las validaciones se cumplen. Mientras el
+      formulario sea inválido puedes escribir, pero no se registra nada.
+    </p>
+    <app-producto-form (productoRegistrado)="registrarProducto($event)" />
+  </section>
+
+  <section class="tarjeta" id="listado">
+    <app-lista-productos [productos]="productos()" />
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <p>Actividad 2, taller 4. Formulario reactivo de registro de productos en Angular.</p>
+  </div>
+</footer>

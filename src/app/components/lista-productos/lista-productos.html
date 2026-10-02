@@ -1,0 +1,45 @@
+<section class="lista">
+  <header class="lista__cabecera">
+    <h2 class="lista__titulo">Productos registrados en la sesión</h2>
+    <span class="lista__contador">
+      <i class="bi bi-collection" aria-hidden="true"></i>
+      {{ productos().length }} producto(s)
+    </span>
+  </header>
+
+  <p class="lista__vacia" *ngIf="productos().length === 0">
+    <i class="bi bi-inbox" aria-hidden="true"></i>
+    Todavía no hay productos. Los que superen las validaciones aparecerán en esta tabla.
+  </p>
+
+  <div class="tabla-contenedor" *ngIf="productos().length > 0">
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Categoría</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Stock</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Fecha de registro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos(); trackBy: identificarProducto">
+          <td>{{ producto.codigo }}</td>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.categoria }}</td>
+          <td class="tabla__numero">{{ producto.precio | number: '1.2-2' }}</td>
+          <td class="tabla__numero">{{ producto.stock }}</td>
+          <td>
+            <span class="etiqueta" [class.etiqueta--inactivo]="!producto.activo">
+              {{ producto.activo ? 'Activo' : 'Inactivo' }}
+            </span>
+          </td>
+          <td>{{ producto.fechaRegistro | date: 'dd/MM/yyyy HH:mm' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
