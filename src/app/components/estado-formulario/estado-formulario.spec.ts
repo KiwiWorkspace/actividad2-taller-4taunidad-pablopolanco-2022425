@@ -57,9 +57,9 @@ describe('EstadoFormulario', () => {
 
   // setValue no marca el grupo como modificado: eso ocurre al escribir, no al asignar por código.
   it('cambia dirty y pristine cuando un control se marca como modificado', () => {
-    expect(componente.indicadoresFormulario().find((i) => i.etiqueta === 'Pristino')?.valor).toBe(
-      'sí'
-    );
+    expect(
+      componente.indicadoresFormulario().find((i) => i.etiqueta === 'Prístino')?.valor
+    ).toBe('sí');
 
     formulario.controls['nombre'].markAsDirty();
 
@@ -68,7 +68,7 @@ describe('EstadoFormulario', () => {
       .map((i) => `${i.etiqueta}:${i.valor}`)
       .join(' ');
     expect(etiquetas).toContain('Modificado:sí');
-    expect(etiquetas).toContain('Pristino:no');
+    expect(etiquetas).toContain('Prístino:no');
     expect(etiquetas).toContain('Intacto:sí');
   });
 

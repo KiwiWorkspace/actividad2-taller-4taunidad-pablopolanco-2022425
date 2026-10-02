@@ -17,12 +17,20 @@
 }
 
 .indicador {
+  align-items: baseline;
   background-color: #eef4f4;
   border: 1px solid var(--borde);
   border-radius: 999px;
   color: var(--texto-suave);
+  display: inline-flex;
   font-size: 0.8rem;
+  gap: 0.3rem;
   padding: 0.2rem 0.65rem;
+}
+
+/* Separa la etiqueta de su valor, por ejemplo "Válido: no". */
+.indicador__etiqueta::after {
+  content: ':';
 }
 
 .indicador--favorable {

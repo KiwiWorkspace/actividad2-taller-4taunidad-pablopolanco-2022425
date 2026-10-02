@@ -168,8 +168,8 @@ describe('ProductoForm', () => {
   });
 
   describe('plantilla', () => {
-    const consulta = (selector: string) =>
-      (fixture.nativeElement as HTMLElement).querySelector(selector);
+    const consulta = <T extends HTMLElement>(selector: string): T | null =>
+      (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 
     const consultaAll = (selector: string) =>
       (fixture.nativeElement as HTMLElement).querySelectorAll(selector);
@@ -196,6 +196,16 @@ describe('ProductoForm', () => {
 
       const campo = (fixture.nativeElement as HTMLElement).querySelectorAll('.campo')[1];
       expect(campo.classList).toContain('campo--invalido');
+    });
+
+    it('deshabilita el botón de limpiar mientras el formulario está prístino', () => {
+      const selector = '.acciones button[type="button"]';
+      expect(consulta<HTMLButtonElement>(selector)?.disabled).toBeTrue();
+
+      componente.formulario.controls.nombre.markAsDirty();
+      fixture.detectChanges();
+
+      expect(consulta<HTMLButtonElement>(selector)?.disabled).toBeFalse();
     });
 
     it('la lista de productos muestra el estado vacío sin registros', () => {

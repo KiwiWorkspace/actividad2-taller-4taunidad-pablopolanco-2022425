@@ -125,6 +125,16 @@ export class ProductoForm {
     this.mensajeError.set('');
   }
 
+  /** Sin cambios que deshacer: el botón de limpiar no tiene nada que hacer. */
+  sinCambiosParaLimpiar(): boolean {
+    return (
+      this.formulario.pristine &&
+      !this.intentoEnvio() &&
+      this.mensajeExito() === '' &&
+      this.mensajeError() === ''
+    );
+  }
+
   /** Un error se muestra si el control es inválido y ya fue tocado o se intentó enviar. */
   mostrarError(clave: ClaveCampo): boolean {
     const control = this.formulario.controls[clave];

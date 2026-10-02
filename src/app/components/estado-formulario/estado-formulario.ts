@@ -22,7 +22,7 @@ export class EstadoFormulario {
       { etiqueta: 'Tocado', valor: formulario.touched ? 'sí' : 'no', favorable: formulario.touched },
       { etiqueta: 'Intacto', valor: formulario.untouched ? 'sí' : 'no', favorable: formulario.untouched },
       { etiqueta: 'Modificado', valor: formulario.dirty ? 'sí' : 'no', favorable: formulario.dirty },
-      { etiqueta: 'Pristino', valor: formulario.pristine ? 'sí' : 'no', favorable: formulario.pristine }
+      { etiqueta: 'Prístino', valor: formulario.pristine ? 'sí' : 'no', favorable: formulario.pristine }
     ];
   }
 
